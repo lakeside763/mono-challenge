@@ -1,0 +1,8 @@
+[build]
+  command = "yarn build && yarn build:api-functions"
+  functions = "functions"
+  publish = "dist"
+
+[functions]
+  directory = "functions/"
+  
