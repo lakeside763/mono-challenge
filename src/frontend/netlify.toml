@@ -1,3 +1,9 @@
 [build]
   command = "yarn build"
   publish = "build"
+
+[build.environment]
+  APP_ENV=production
+  REACT_APP_ENV=production
+  REACT_APP_API_URL=https://mono-api.netlify.app/.netlify/functions/api
+
