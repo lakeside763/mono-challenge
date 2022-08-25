@@ -1,4 +1,13 @@
-import { server, port, app, router } from "./server";
+import { server, port, app, router, logger, shutdown } from "./server";
 
 app.use('/api', router);
-server.listen(port, () => console.log(`Listen on server http://localhost:${port}`));
+
+server.listen(port, () => logger.info(`Listen on server http://localhost:${port}`));
+
+process.on('SIGINT', async () => {
+  await shutdown(server);
+});
+
+process.on('SIGTERM', async () => {
+  await shutdown(server);
+});
