@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useMemo } from 'react';
+import MonoConnect from '@mono.co/connect.js';
+
 import './App.css';
 
 function App() {
+
+  const monoConnect = useMemo(() => {
+    const monoInstance = new MonoConnect({
+      key: process.env.REACT_APP_MONO_TEST_PK,
+      onSuccess: ({ code }: { code: string }) => console.log(`Linked successfully: ${code}`),
+      onClose: () => console.log('Widget closed'),
+      onLoad: () => console.log('Widget loaded successfully'),
+    });
+
+    monoInstance.setup();
+
+    return monoInstance;
+  }, []);
+
+  const reauthoriseAccount = () => {
+    const reauth_token = "code_xyzUi8olavk";
+    monoConnect.reauthorise(reauth_token);
+    monoConnect.open();
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-          {process.env.REACT_APP_ENV}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Mono App Integration</h1>
+      <div>
+        <button onClick={() => monoConnect.open()} className="btn-primary">Link account with Mono</button>
+        <button onClick={() => reauthoriseAccount()} className="btn-primary">Reauthorise user account</button>
+      </div>
     </div>
   );
 }
