@@ -1,5 +1,6 @@
 import compression from 'compression';
 import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
 import Redis from 'ioredis';
 import helmet from 'helmet';
 import winston from 'winston';
@@ -8,7 +9,7 @@ import http, { Server } from 'http';
 import config from './config';
 import appRoutes from './routes/app.routes';
 
-export const { port,redis } = config;
+export const { port,redis, mongoDB } = config;
 export const app = express();
 export const server = http.createServer(app);
 export const router = express.Router();
@@ -46,9 +47,15 @@ router.get('/', (_req: Request, res: Response) => {
 appRoutes(router);
 
 
+(async () => {
+  await mongoose.connect(mongoDB);
+  logger.info('connect to mongoDB');
+})();
+
 export const shutdown = async(connection: Server) => {
   logger.info('Received kill signal shutting down gracefully');
   connection.close();
+  mongoose.disconnect();
   return process.exit();
 }
 

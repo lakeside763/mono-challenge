@@ -3,6 +3,8 @@ const redisPort: number = parseInt(process.env.REDIS_PORT!);
 const redisHost: string = process.env.REDIS_HOST!
 const redisPass: string = process.env.REDIS_PASS!
 
+const mongoDB: string = process.env.MONGO_URI!
+
 const redis = {
   port: redisPort,
   host: redisHost,
@@ -12,4 +14,5 @@ const redis = {
 export default {
   port,
   redis,
+  mongoDB,
 }
