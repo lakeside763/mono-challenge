@@ -1,10 +1,14 @@
-import { DB } from "../models/db.model";
+import dbModels from "../models/db.model";
+import { services } from "../server";
 
-class AppService {
-  db: DB;
-  constructor(db: DB) {
-    this.db = db;
+class RootService {
+  get db() {
+    return dbModels()
+  }
+
+  get services() {
+    return services;
   }
 }
 
-export default AppService;
+export default RootService;

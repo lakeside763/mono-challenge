@@ -9,8 +9,8 @@ import http, { Server } from 'http';
 import config from './config';
 import { authRoutes } from './routes';
 import { AuthService, TokenService } from './services';
-import dbModels from './models/db.model';
 import { errorHandler } from './middlewares/error-handler';
+// import dbModels from './models/db.model';
 
 export const { port,redis, mongoDB, jwt } = config;
 export const app = express();
@@ -53,12 +53,12 @@ router.get('/', (_req: Request, res: Response) => {
 });
 
 // db models
-const db = dbModels();
+// const db = dbModels();
 
 // Services
-const services = {
+export const services = {
   token: new TokenService(jwt, cache),
-  auth: new AuthService(db),
+  auth: new AuthService(),
 }
 
 // Routes

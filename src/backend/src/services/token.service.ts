@@ -17,7 +17,7 @@ class TokenService {
   }
 
   cacheKey(id: string) {
-    return `g2i-api-${process.env.NODE_ENV}-tokenchacke-${id}`;
+    return `mono-api-${process.env.NODE_ENV}-tokenchacke-${id}`;
   }
 
   async set({ user }: any) {
@@ -29,9 +29,9 @@ class TokenService {
     return jwtToken;
   }
 
-  async sign({ id, overrides = {} }: any) {
+  async sign({ _id, overrides = {} }: any) {
     const jwtid = uuidv4();
-    const subject = id.toString();
+    const subject = _id.toString();
     const options = {
       ...this.jwtOptions,
       subject,

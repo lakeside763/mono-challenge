@@ -23,6 +23,16 @@ export interface IUser {
   updatedAt: Date;
 }
 
+export interface UserResponse {
+  _id: ObjectId;
+  firstName: string;
+  lastName: string;
+  email: string;
+  isAccountLinked: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 const userSchema = new mongoose.Schema<IUser>({
   firstName: {
     type: String,
@@ -37,6 +47,11 @@ const userSchema = new mongoose.Schema<IUser>({
     required: true,
     match: /.+\@.+\..+/,
     unique: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6
   },
   isAccountLinked: {
     type: Boolean,
