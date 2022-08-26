@@ -7,9 +7,12 @@ import winston from 'winston';
 import cors from 'cors';
 import http, { Server } from 'http';
 import config from './config';
-import appRoutes from './routes/app.routes';
+import { authRoutes } from './routes';
+import { AuthService, TokenService } from './services';
+import dbModels from './models/db.model';
+import { errorHandler } from './middlewares/error-handler';
 
-export const { port,redis, mongoDB } = config;
+export const { port,redis, mongoDB, jwt } = config;
 export const app = express();
 export const server = http.createServer(app);
 export const router = express.Router();
@@ -32,6 +35,12 @@ if (process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({ format: winston.format.simple() }));
 }
 
+// database connection
+(async () => {
+  await mongoose.connect(mongoDB);
+  logger.info('connect to mongoDB');
+})();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());
@@ -43,14 +52,20 @@ router.get('/', (_req: Request, res: Response) => {
   res.status(200).json({ version: '1.0.0', port });
 });
 
+// db models
+const db = dbModels();
+
+// Services
+const services = {
+  token: new TokenService(jwt, cache),
+  auth: new AuthService(db),
+}
+
 // Routes
-appRoutes(router);
+authRoutes(router, services);
 
-
-(async () => {
-  await mongoose.connect(mongoDB);
-  logger.info('connect to mongoDB');
-})();
+// error handler middleware
+app.use(errorHandler);
 
 export const shutdown = async(connection: Server) => {
   logger.info('Received kill signal shutting down gracefully');
