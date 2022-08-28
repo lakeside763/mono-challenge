@@ -1,6 +1,6 @@
 import { Login, Signup } from "../models/auth.model";
 import { hash, compare } from 'bcryptjs';
-import RootService from "./app.service";
+import RootService from "./root.service";
 import { AuthenticationError } from "../utils/errors/authentication-error";
 
 class AuthService extends RootService {

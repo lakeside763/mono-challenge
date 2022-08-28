@@ -18,7 +18,7 @@ export interface IUser {
   lastName: string;
   email: string;
   password: string;
-  isAccountLinked: boolean;
+  hasLinkedAccount: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -28,7 +28,7 @@ export interface UserResponse {
   firstName: string;
   lastName: string;
   email: string;
-  isAccountLinked: boolean;
+  hasLinkedAccount: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema<IUser>({
     required: true,
     minLength: 6
   },
-  isAccountLinked: {
+  hasLinkedAccount: {
     type: Boolean,
     default: () => false
   },

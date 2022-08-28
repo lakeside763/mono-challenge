@@ -8,9 +8,9 @@ import cors from 'cors';
 import http, { Server } from 'http';
 import config from './config';
 import { authRoutes } from './routes';
-import { AuthService, TokenService } from './services';
-import { errorHandler } from './middlewares/error-handler';
-// import dbModels from './models/db.model';
+import { AuthService, TokenService, AccountService } from './services';
+import { errorHandler } from './middlewares';
+import accountRoutes from './routes/account.routes';
 
 export const { port,redis, mongoDB, jwt } = config;
 export const app = express();
@@ -48,21 +48,23 @@ app.use(helmet());
 app.use(cors(corsOptions));
 
 
+
 router.get('/', (_req: Request, res: Response) => {
   res.status(200).json({ version: '1.0.0', port });
 });
 
-// db models
-// const db = dbModels();
 
 // Services
 export const services = {
   token: new TokenService(jwt, cache),
   auth: new AuthService(),
+  account: new AccountService(),
 }
+
 
 // Routes
 authRoutes(router, services);
+accountRoutes(router, services);
 
 // error handler middleware
 app.use(errorHandler);

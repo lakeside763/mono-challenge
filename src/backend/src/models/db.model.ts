@@ -1,13 +1,10 @@
-import { Model } from 'mongoose';
-import User, { IUser } from "./auth.model";
-
-export interface DB {
-  users: Model<IUser>
-}
+import Account from "./account.model";
+import User from "./auth.model";
 
 const dbModels = () => {
   return {
     users: User,
+    accounts: Account,
   }
 }
 export default dbModels;

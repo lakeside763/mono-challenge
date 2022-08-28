@@ -65,6 +65,13 @@ class TokenService {
     return parts[1];
   }
 
+  async checkAuthorizationHeader({ req }: any) {
+    if (!req.headers || !req.headers.authorization) {
+      return false;
+    }
+    return true;
+  }
+
   async getAuth({ req, next }: any) {
     try {
       const jwtToken = await this.getFromHeaders({ req });
