@@ -9,8 +9,6 @@ function App() {
     const monoInstance = new MonoConnect({
       key: process.env.REACT_APP_MONO_TEST_PK,
       onSuccess: ({ code }: { code: string }) => console.log(`Linked successfully: ${code}`),
-      onClose: () => console.log('Widget closed'),
-      onLoad: () => console.log('Widget loaded successfully'),
     });
 
     monoInstance.setup();
