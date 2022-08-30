@@ -1,36 +1,23 @@
-import React, { useMemo } from 'react';
-import MonoConnect from '@mono.co/connect.js';
-
-import './App.css';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Dashboard from './components/dashboard/dashboard.component';
+import LinkAccount from './components/link-account/link-account.component';
+import Login from './components/login/login.component';
+import Signup from './components/signup/signup.component';
+import Home from './routes/home/home.component';
 
 function App() {
-
-  const monoConnect = useMemo(() => {
-    const monoInstance = new MonoConnect({
-      key: process.env.REACT_APP_MONO_TEST_PK,
-      onSuccess: ({ code }: { code: string }) => console.log(`Linked successfully: ${code}`),
-    });
-
-    monoInstance.setup();
-
-    return monoInstance;
-  }, []);
-
-  const reauthoriseAccount = () => {
-    const reauth_token = "code_xyzUi8olavk";
-    monoConnect.reauthorise(reauth_token);
-    monoConnect.open();
-  }
-
+  
   return (
-    <div className="App">
-      <h1>Mono App Integration</h1>
-      <div>
-        <button onClick={() => monoConnect.open()} className="btn-primary">Link account with Mono</button>
-        <button onClick={() => reauthoriseAccount()} className="btn-primary">Reauthorise user account</button>
-      </div>
-    </div>
-  );
+    <Routes>
+      <Route index element={<Login />}/>
+      <Route path="signup" element={<Signup />} />
+      <Route path='app' element={<Home />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="link-account" element={<LinkAccount />} />
+      </Route>
+    </Routes>
+  )
 }
 
 export default App;

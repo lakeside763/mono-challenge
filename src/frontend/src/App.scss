@@ -1,0 +1,134 @@
+.wrapper {
+  width: 100%;
+
+  .sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      color: #fff;
+      margin-left: 50px;
+      cursor: pointer;
+      display: block;
+    }
+
+
+    a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+
+      &:hover {
+        color: #f1f1f1;
+      }
+    }
+
+    @media screen and (min-width: 360px) {
+      width: 0px;
+    }
+
+    @media screen and (min-width: 860px) {
+      width: 250px;
+
+      .close-btn {
+        display: none;
+      }
+    }
+  }
+
+  .main {
+    transition: margin-left .5s;
+    padding: 25px;
+
+    .open-nav {
+      font-size:  28px;
+      cursor: pointer;
+      display: block;
+    }
+    
+
+    @media screen and (min-width: 360px) {
+      margin-left: 0px;
+      min-width: 360px;
+
+      .open-nav {
+        display: block;
+      }
+
+    }
+  
+    @media screen and (min-width: 860px) {
+      margin-left: 250px;
+      min-width: calc(100% - 300px);
+
+      .open-nav {
+        display: none;
+      }
+      
+    }
+  }
+}
+
+
+
+// .App {
+//   text-align: center;
+// }
+
+// .App-logo {
+//   height: 40vmin;
+//   pointer-events: none;
+// }
+
+// @media (prefers-reduced-motion: no-preference) {
+//   .App-logo {
+//     animation: App-logo-spin infinite 20s linear;
+//   }
+// }
+
+// .App-header {
+//   background-color: #282c34;
+//   min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: calc(10px + 2vmin);
+//   color: white;
+// }
+
+// .App-link {
+//   color: #61dafb;
+// }
+
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
+
+
+// .btn-primary {
+//     border: thin solid #61dafb;
+//     padding: 10px 20px;
+//     margin: 20px;
+// }
+

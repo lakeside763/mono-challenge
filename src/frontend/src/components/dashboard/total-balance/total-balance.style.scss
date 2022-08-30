@@ -1,0 +1,63 @@
+.account {
+  box-shadow: 8px 10px 20px 3px #f2f2f2;
+  border-radius: 20px;
+  padding: 20px;
+
+  .figure {
+    text-align: center;
+
+    .figure-child {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    p {
+      font-weight: normal;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    h1 {
+      font-size: 54px;
+    }
+  }
+
+  .button {
+    text-align: center;
+
+    .add-link {
+      padding: 0px auto;
+      margin: 30px;
+    
+      
+      img {
+        height: 38px;
+      }
+
+      .link-btn {
+        font-size: 38px;
+        color: #ebebeb;
+        cursor: pointer;
+      }
+    }
+
+    .unlink {
+      .warning-btn {
+        background-color: #f7e9e9;
+        padding: 20px 40px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 10px;
+        color: #f22828;
+        cursor: pointer;
+      }
+
+      :hover {
+        opacity: .8;
+      }
+    }
+
+    
+  }
+}
