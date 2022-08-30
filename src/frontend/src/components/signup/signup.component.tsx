@@ -1,10 +1,10 @@
 import React from 'react';
 import Logo from '../../assets/mono-black-logo.png';
+import { Link } from 'react-router-dom';
 
 import './signup.style.scss';
 
 const Signup = () => {
-  const forgotPassword = '#';
   return (
     <div className="wrapper">
       <div className="container">
@@ -35,7 +35,7 @@ const Signup = () => {
               <button type="submit">Get Started</button>
               <span>
                 Already have an account? &nbsp;
-                <a href={forgotPassword}>Sign in</a>
+                <Link to="/">Sign in</Link>
               </span>
             </div>
           </form>

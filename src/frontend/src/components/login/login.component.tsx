@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../../assets/mono-black-logo.png';
 import "./login.style.scss";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const forgotPassword = '#';
@@ -32,7 +33,7 @@ const Login = () => {
               <button type="submit">Login</button>
               <span>
                 Don't have an account? &nbsp;
-                <a href={forgotPassword}>Sign Up</a>
+                <Link to="/signup">Signup</Link>
               </span>
             </div>
           </form>
