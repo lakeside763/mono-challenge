@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logo from '../../assets/mono-black-logo.png';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -30,7 +30,7 @@ const Signup = () => {
 
   const onSubmit = (formData: FormValues) => {
     navigate('/app/link-account');
-    console.log(formData);
+    console.log(formData)
   }
 
   return (
