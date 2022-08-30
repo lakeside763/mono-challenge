@@ -34,13 +34,17 @@
         .form-group {
           display: flex;
           flex-direction: column;
-          margin-bottom: 10px;
+          margin-bottom: 20px;
 
           input {
             padding: 15px 20px;
             font-size: 16px;
             border-radius: 5px;
             border: thin solid #e0e0e0
+          }
+
+          .input-error {
+            border:  1px solid #c83017;
           }
 
           button {
@@ -75,6 +79,31 @@
           }
         }
 
+        @media screen and (min-width: 360px) {
+            .flex-div-justify {
+              flex-wrap: wrap;
+
+            .form-group {
+              input {
+                width: calc(100vw - 61px);
+              }
+            }
+          }
+        }
+
+        @media screen and (min-width: 840px) {
+
+          .flex-div-justify {
+            flex-wrap: nowrap;
+
+          .form-group {
+            input {
+              width: 150px;
+            }
+          }
+        }
+        }
+
         .form-group2 {
           display: flex;
           justify-content: space-between;
@@ -86,6 +115,31 @@
       }
     }
 
+  }
+
+  @media screen and (min-width: 360px) {
+    background-color: #fff;
+    padding-top: 50px;
+    height: calc(100vh - 50px);
+    width: 100%;
+
+    .container {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border-radius: 0px;
+    }
+  }
+
+  @media screen and (min-width: 840px) {
+    height: calc(100vh - 150px);
+    background-color: #101010;
+    padding-top: 150px;
+
+    .container {
+      width: 400px;
+      padding: 50px 100px;
+      border-radius: 20px;
+    }
   }
 
 }

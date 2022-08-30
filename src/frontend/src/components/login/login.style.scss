@@ -79,4 +79,29 @@
 
   }
 
+  @media screen and (min-width: 360px) {
+    background-color: #fff;
+    padding-top: 50px;
+    height: calc(100vh - 50px);
+    width: 100%;
+
+    .container {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border-radius: 0px;
+    }
+  }
+
+  @media screen and (min-width: 840px) {
+    height: calc(100vh - 150px);
+    background-color: #101010;
+    padding-top: 150px;
+
+    .container {
+      width: 400px;
+      padding: 50px 100px;
+      border-radius: 20px;
+    }
+  }
+
 }

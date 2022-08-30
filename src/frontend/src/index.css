@@ -60,3 +60,10 @@ h1, h2, h3, h4, h5, p {
     width: 420px;
   }
 }
+
+.errors {
+  color: #c83017;
+  font-size: 14px;
+  margin-top: 0px !important;
+  text-align: left !important;
+}
