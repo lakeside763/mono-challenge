@@ -1,29 +1,60 @@
 import React from 'react';
 import Logo from '../../assets/mono-black-logo.png';
-import "./login.style.scss";
 import { Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import "./login.style.scss";
+import useAccount from '../../hooks/use-account';
+
+type FormValues = {
+  email: string,
+  password: string,
+}
 
 const Login = () => {
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    toast.success('Login successfully');
+  const { login } = useAccount();
+  const schema = Yup.object({
+    email: Yup.string().required('First name is required'),
+    password: Yup.string().required('Last name is required'),
+  });
+
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ 
+    mode: 'onTouched',
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (formData: FormValues) => {
+    await login(formData);
   }
+
   return (
     <div className="login-wrapper">
       <div className="container">
         <div className="header"><img src={Logo}  alt="logo"/></div>
         <p>Securely login to your account</p>
         <div className="login-form">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <input name="email" placeholder="Email" />
-              <span></span>
+              <input 
+                type="email" 
+                placeholder="Email"
+                {...register('email')}
+                name="email"
+                className={errors.email?.message ? 'input-errors' : '' }
+              />
+              <span className="errors">{errors.email?.message}</span>
             </div>
             <div className="form-group">
-              <input name="password" placeholder="Password" />
-              <span></span>
+              <input 
+                type="password" 
+                placeholder="Password"
+                {...register('password')}
+                name="password"
+                className={errors.password?.message ? 'input-errors' : '' }
+              />
+              <span className="errors">{errors.password?.message}</span>
             </div>
             <div className="form-group2">
               <div>

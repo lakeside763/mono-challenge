@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
 import './signup.style.scss';
+import useAccount from '../../hooks/use-account';
 
 type FormValues = {
   firstName: string,
@@ -15,7 +15,7 @@ type FormValues = {
 }
 
 const Signup = () => {
-  const navigate = useNavigate();
+  const { signup } = useAccount();
   const schema = Yup.object({
     firstName: Yup.string().min(2).required('First name is required'),
     lastName: Yup.string().min(2).required('Last name is required'),
@@ -28,9 +28,8 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (formData: FormValues) => {
-    navigate('/app/link-account');
-    console.log(formData)
+  const onSubmit = async (formData: FormValues) => {
+    await signup(formData);
   }
 
   return (
