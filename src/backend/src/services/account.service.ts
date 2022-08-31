@@ -15,18 +15,24 @@ class AccountService extends RootService {
   }
 
   async saveLinkedAccount({ code, accountId, userId, hasLinkedAccount }: SaveLinkAccount) {
-    const details = await this.getAccountDetails(accountId);
-    console.log(details, 'details');
-    // if (!hasLinkedAccount) {
-    //   await this.db.users.findOneAndUpdate({ _id: userId }, { hasLinkedAccount: !hasLinkedAccount });
-    // }
-    // return this.db.accounts.create({
-    //   userId,
-    //   code,
-    //   accountId,
-    //   isDefault: hasLinkedAccount ? false : true,
-    // });
-    return details;
+    const { account } = await this.getAccountDetails(accountId);
+
+    if (!hasLinkedAccount) {
+      await this.db.users.findOneAndUpdate({ _id: userId }, { hasLinkedAccount: !hasLinkedAccount });
+    }
+
+    return this.db.accounts.create({
+      userId,
+      code,
+      accountId,
+      name: account.name,
+      currency: account.currency,
+      accountNumber: account.accountNumber,
+      balance: account.balance,
+      bankName: account.institution.name,
+      bankCode: account.institution.bankCode,
+      isDefault: hasLinkedAccount ? false : true,
+    });
   }
 
   async getAccountDetails(accountId: string) {

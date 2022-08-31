@@ -5,6 +5,12 @@ export interface IAccount {
   userId: string;
   code: string;
   accountId: string;
+  name: string;
+  currency: string;
+  accountNumber: string;
+  balance: number;
+  bankName: string;
+  bankCode: string;
   isDefault: boolean;
   createdAt: Date;
   updatedAt: Date
@@ -27,6 +33,12 @@ const accountSchema = new mongoose.Schema<IAccount>({
   accountId: {
     type: String
   },
+  name: String,
+  currency: String,
+  accountNumber: String,
+  balance: Number,
+  bankName: String,
+  bankCode: String,
   isDefault: {
     type: Boolean,
     default: () => false

@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { LinkInput } from '../models/account.model';
+import { SaveLinkAccount } from '../models/account.model';
 import { requireAuth } from '../middlewares';
 import { Services } from '../models/services.model';
 import { errorResponse } from '../utils/utils';
@@ -34,7 +34,7 @@ function accountRoutes(router: Router, services: Services) {
 
   router.post('/accounts/save', requireAuth, async(req: Request, res: Response, next: NextFunction) => {
     try {
-      const data: LinkInput = req.body;
+      const data: SaveLinkAccount = req.body;
       const { _id: userId, hasLinkedAccount } = req.auth.user;
       const account = await services.account.saveLinkedAccount({ ...data, userId, hasLinkedAccount });
       return res.status(200).json(account);
