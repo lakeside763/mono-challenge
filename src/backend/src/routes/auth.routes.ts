@@ -15,8 +15,8 @@ function authRoutes(router: Router, services: Services) {
 
   router.post('/auth/login', async(req: Request, res: Response, next: NextFunction) => {
     try {
-      const user = await services.auth.login(req.body);
-      const token = await services.token.set({ user });
+      const user: any = await services.auth.login(req.body);
+      const token: any = await services.token.set({ user });
       const { _doc: { password, ...rest } }: any  = user;
       return res.status(200).json({ user: { ...rest }, token });
     } catch (error) {

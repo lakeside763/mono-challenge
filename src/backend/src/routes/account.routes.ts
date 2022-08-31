@@ -14,6 +14,15 @@ function accountRoutes(router: Router, services: Services) {
     }
   });
 
+  router.get('/accounts/default', requireAuth, async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const defaultAccount = await services.account.getDefaultAccount(req.auth.user._id);
+      return res.status(200).json(defaultAccount);
+    } catch (error) {
+      errorResponse(error, res, next);
+    }
+  })
+
   router.get('/accounts/:id', requireAuth, async (req: Request, res: Response, next: NextFunction) => {
     try {
       const account = await services.account.getAccountDetails(req.params.id);

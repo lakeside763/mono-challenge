@@ -39,6 +39,15 @@ class AccountService extends RootService {
     return this.get(`/accounts/${accountId}`);
   }
 
+  async getDefaultAccount(userId: string) {
+    const response = await this.db.accounts.where('userId').equals(userId)
+                                            .where('isDefault').equals(true);
+    if (response) {
+      const { account } = await this.getAccountDetails(response[0].accountId);
+      return account;
+    }
+  }
+
   async getAccountList(userId: string) {
     return this.db.accounts.find({ userId });
   }
