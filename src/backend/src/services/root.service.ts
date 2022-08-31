@@ -16,7 +16,7 @@ class RootService {
   }
 
   async get(path: string) {
-    const url = `${this.baseURL}/${path}`
+    const url = `${this.baseURL}${path}`
     const response: any = await fetch(url, {
       method: 'GET',
       headers: {
@@ -28,7 +28,8 @@ class RootService {
   }
 
   async post(path: string, data: any) {
-    const url = `${this.baseURL}/${path}`
+    const url = `${this.baseURL}${path}`
+    console.log(url);
     const response: any = await fetch(url, {
       method: 'POST',
       headers: {

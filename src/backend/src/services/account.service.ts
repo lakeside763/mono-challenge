@@ -1,4 +1,4 @@
-import { LinkInput } from "../models/account.model";
+import { SaveLinkAccount } from "../models/account.model";
 import RootService from "./root.service"
 
 class AccountService extends RootService {
@@ -14,21 +14,23 @@ class AccountService extends RootService {
     return id;
   }
 
-  async addLinkedAccount({ code, userId, hasLinkedAccount }: LinkInput) {
-    const accountId = await this.getAccountId(code);
-    if (!hasLinkedAccount) {
-      await this.db.users.findOneAndUpdate({ _id: userId }, { hasLinkedAccount: !hasLinkedAccount });
-    }
-    return this.db.accounts.create({
-      userId,
-      code,
-      accountId,
-      isDefault: hasLinkedAccount ? false : true,
-    });
+  async saveLinkedAccount({ code, accountId, userId, hasLinkedAccount }: SaveLinkAccount) {
+    const details = await this.getAccountDetails(accountId);
+    console.log(details, 'details');
+    // if (!hasLinkedAccount) {
+    //   await this.db.users.findOneAndUpdate({ _id: userId }, { hasLinkedAccount: !hasLinkedAccount });
+    // }
+    // return this.db.accounts.create({
+    //   userId,
+    //   code,
+    //   accountId,
+    //   isDefault: hasLinkedAccount ? false : true,
+    // });
+    return details;
   }
 
   async getAccountDetails(accountId: string) {
-    return this.get(`accounts/${accountId}`);
+    return this.get(`/accounts/${accountId}`);
   }
 
   async getAccountList(userId: string) {
@@ -36,11 +38,11 @@ class AccountService extends RootService {
   }
 
   async getAccountTransactions(accountId: string) {
-    return this.get(`accounts/${accountId}/transactions`);
+    return this.get(`/accounts/${accountId}/transactions`);
   }
 
   async unLinkAccount(accountId: string) {
-    await this.post(`accounts/${accountId}/unlink`, {});
+    await this.post(`/accounts/${accountId}/unlink`, {});
     return { message: `account with ID ${accountId} unlinked successfully`}
   }
 }

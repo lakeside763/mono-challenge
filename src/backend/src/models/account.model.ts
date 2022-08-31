@@ -10,8 +10,9 @@ export interface IAccount {
   updatedAt: Date
 }
 
-export interface LinkInput {
-  code: string
+export interface SaveLinkAccount {
+  code: string;
+  accountId: string;
   userId?: string;
   hasLinkedAccount?: boolean;
 }

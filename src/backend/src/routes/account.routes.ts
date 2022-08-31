@@ -32,11 +32,11 @@ function accountRoutes(router: Router, services: Services) {
     }
   });
 
-  router.post('/accounts/link', requireAuth, async(req: Request, res: Response, next: NextFunction) => {
+  router.post('/accounts/save', requireAuth, async(req: Request, res: Response, next: NextFunction) => {
     try {
       const data: LinkInput = req.body;
       const { _id: userId, hasLinkedAccount } = req.auth.user;
-      const account = await services.account.addLinkedAccount({ ...data, userId, hasLinkedAccount });
+      const account = await services.account.saveLinkedAccount({ ...data, userId, hasLinkedAccount });
       return res.status(200).json(account);
     } catch (error) {
       errorResponse(error, res, next);
