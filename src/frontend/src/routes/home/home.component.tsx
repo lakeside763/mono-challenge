@@ -43,11 +43,11 @@ function Home() {
             <Link to="/app/dashboard" >Dashboard</Link>
             <Link to="/app/list" >Accounts</Link>
             <Link to="/app/settings" >Settings</Link>
-            <Link to="/#" onClick={logout} className="flex-link">
-              <span>Logout</span> <FiLogOut />
-            </Link>
           </Fragment>
         ): ''}
+          <Link to="/#" onClick={logout} className="flex-link">
+                <span>Logout</span> <FiLogOut />
+          </Link>
       </div>
       <main className="main" ref={mainDivRef}>
         <div className="top-bar-wrapper">
