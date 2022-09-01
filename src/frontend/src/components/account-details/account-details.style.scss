@@ -1,0 +1,30 @@
+.details-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .other-info {
+    margin-top: 20px;
+     
+    td {
+      &:first-child {
+        width: 200px;
+      }
+    }
+  }
+
+  .transactions-list {
+    margin-top: 50px;
+    
+    table {
+      width: 100%;
+
+      tr {
+        
+        td {
+          padding: 10px 0;
+          border-bottom: thin solid #f2f2f2;
+        }
+      }
+    }
+  }
+}

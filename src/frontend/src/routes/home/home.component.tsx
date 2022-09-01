@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom';
 import  logo from '../../assets/mono-white-logo.png';
 import LoginUser from '../../assets/user-avatar.jpg'
 import { AppContext } from '../../context/app.context';
+import { FiLogOut } from 'react-icons/fi';
+import  { useLocation } from 'react-router-dom';
 import './home.style.scss';
 
 function Home() {
-  const { user } = useContext(AppContext);
+  const { user, logout } = useContext(AppContext);
+  const location = useLocation();
+
+  const pathname = location.pathname;
+
   const closeNavRef = useRef<HTMLSpanElement | any>(null);
   const openNavRef = useRef<HTMLSpanElement | any>(null);
   const sideNavRef = useRef<HTMLDivElement | any>(null);
@@ -32,13 +38,16 @@ function Home() {
           <div><img src={logo} alt="logo" /></div>
           <span onClick={handleCloseNavBtn} ref={closeNavRef} className="close-btn">&times;</span>
         </div>
-        {user && user.hasLinkedAccount ? (
+        {pathname !== '/app/link-account' ? (
           <Fragment>
             <Link to="/app/dashboard" >Dashboard</Link>
             <Link to="/app/list" >Accounts</Link>
             <Link to="/app/settings" >Settings</Link>
+            <Link to="/#" onClick={logout} className="flex-link">
+              <span>Logout</span> <FiLogOut />
+            </Link>
           </Fragment>
-        ) : ''}
+        ): ''}
       </div>
       <main className="main" ref={mainDivRef}>
         <div className="top-bar-wrapper">

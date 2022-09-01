@@ -41,6 +41,18 @@
       &:hover {
         color: #f1f1f1;
       }
+
+      .flex-link {
+        display: flex;
+
+        span {
+          margin-left: 10px !important;
+        }
+        svg {
+          margin-top: 10px !important;
+        }
+      }
+      
     }
 
     @media screen and (min-width: 360px) {

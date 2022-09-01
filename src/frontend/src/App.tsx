@@ -9,6 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import AccountList from './components/account-list/account-list.component';
 import AccountDetails from './components/account-details/account-details.component';
 import Settings from './components/settings/settings.component';
+import RequireAuth from './components/common/require-auth.component';
 
 function App() {
   
@@ -18,12 +19,14 @@ function App() {
         <Route path="/">
           <Route index element={<Login />}/>
           <Route path="/signup" element={<Signup />} />
-          <Route path='/app' element={<Home />}>
-            <Route path="/app/dashboard" element={<Dashboard />} />
-            <Route path="/app/link-account" element={<LinkAccount />} />
-            <Route path="/app/list" element={<AccountList />} />
-            <Route path="/app/account/:id" element={<AccountDetails />} />
-            <Route path="/app/settings" element={<Settings />} />
+          <Route element={<RequireAuth />}>
+            <Route path='/app' element={<Home />}>
+              <Route path="/app/dashboard" element={<Dashboard />} />
+              <Route path="/app/link-account" element={<LinkAccount />} />
+              <Route path="/app/list" element={<AccountList />} />
+              <Route path="/app/list/:id" element={<AccountDetails />} />
+              <Route path="/app/settings" element={<Settings />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

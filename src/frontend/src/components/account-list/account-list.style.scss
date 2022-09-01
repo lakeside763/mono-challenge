@@ -1,0 +1,54 @@
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .heading {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;;
+
+    .link-btn {
+      display: inline-block;
+      font-size: 32px;
+      color: #444;
+      cursor: pointer;
+      margin-left: 10px;
+      margin-top: -2px;
+
+      svg {
+        stroke-width: 1px;
+      }
+    }
+  }
+
+  .table-list {
+    .table-head {
+      td {
+        font-weight: bold;
+        font-size: 14px;
+        color: #444;
+      }
+    }
+
+    .table-row {
+      margin-bottom: 10px; 
+
+      td {
+        .action-btn {
+          display: flex;
+          justify-self: flex-start;
+          font-size: 20px;
+
+          svg {
+            margin-right: 10px;
+            cursor: pointer;
+
+            &:hover {
+              opacity: .7;
+            }
+          }
+        }
+      }
+    }
+  }
+}

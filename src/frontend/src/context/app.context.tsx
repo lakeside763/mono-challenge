@@ -5,9 +5,11 @@ interface AppContextInterface {
   signup: (data: any) => {}
   login: (data: any) => {}
   user: any,
+  auth: false
+  logout: () => {}
   saveLinkedAccount: (data: any) => {}
   account: any,
-  getAccountById: (data: any) => {}
+  getAccountDetailsById: (accountId: string) => {}
   accountList: any
   getAccountList: () => []
   transactions: any[];
