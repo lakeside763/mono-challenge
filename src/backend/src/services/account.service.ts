@@ -57,9 +57,9 @@ class AccountService extends RootService {
     return this.get(`/accounts/${accountId}/transactions`);
   }
 
-  async unLinkAccount(accountId: string) {
-    await this.post(`/accounts/${accountId}/unlink`, {});
-    return { message: `account with ID ${accountId} unlinked successfully`}
+  async unLinkAccount(accountId: string, userId: string) {
+    await this.db.accounts.findOneAndDelete({ accountId });
+    return this.getAccountList(userId)
   }
 }
 

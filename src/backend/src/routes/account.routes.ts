@@ -54,7 +54,7 @@ function accountRoutes(router: Router, services: Services) {
 
   router.post('/accounts/:id/unlink', requireAuth, async(req: Request, res: Response, next: NextFunction) => {
     try {
-      const unlink = await services.account.unLinkAccount(req.params.id);
+      const unlink = await services.account.unLinkAccount(req.params.id, req.auth.user._id);
       return res.status(200).json(unlink);
     } catch (error) {
       errorResponse(error, res, next);
