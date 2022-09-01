@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import "./login.style.scss";
 import { AppContext } from '../../context/app.context';
 
-type FormValues = {
+export type LoginFormValues = {
   email: string,
   password: string,
 }
@@ -20,12 +20,12 @@ const Login = () => {
     password: Yup.string().required('Last name is required'),
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ 
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({ 
     mode: 'onTouched',
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (formData: FormValues) => {
+  const onSubmit = async (formData: LoginFormValues) => {
     login(formData);
   }
 

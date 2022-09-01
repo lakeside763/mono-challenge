@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import './settings.style.scss';
 
 const Settings = () => {
   return (
-    <div>Settings</div>
+    <div className="settings-wrapper">
+      <h3>Delete My Account</h3>
+
+      <button type="button" className="delete">Delete</button>
+    </div>
   )
 }
 

@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import './signup.style.scss';
 import useAccount from '../../hooks/use-account';
 
-type FormValues = {
+export type SignupFormValues = {
   firstName: string,
   lastName: string,
   email: string,
@@ -23,12 +23,12 @@ const Signup = () => {
     password: Yup.string().min(6).required('Password is required').matches(/^\S*$/, 'Whitespace is not allowed'),
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({
+  const { register, handleSubmit, formState: { errors } } = useForm<SignupFormValues>({
     mode: 'onTouched',
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (formData: FormValues) => {
+  const onSubmit = async (formData: SignupFormValues) => {
     await signup(formData);
   }
 

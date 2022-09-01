@@ -3,15 +3,16 @@ import toast from 'react-hot-toast';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useFetch from './use-fetch';
 
-// interface UserInterface {
-//   _id: string,
-//   firstName: string,
-//   lastName: string,
-//   email: string,
-//   hasLinkedAccount: string,
-//   createdAt: string,
-//   updatedAt: string
-// }
+export interface UserInterface {
+  _id: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  hasLinkedAccount: string,
+  defaultAccountId: string,
+  createdAt: string,
+  updatedAt: string
+}
 
 const useAccount = () => {
   const navigate = useNavigate();
@@ -107,6 +108,14 @@ const useAccount = () => {
   };
   
 
+  const unlinkAccount = async (accountId: string) => {
+    const response = await fetch(`/accounts/${accountId}/unlink`, 'POST');
+    if (response) {
+      setAccountList(response);
+      toast.success('Account unlinked successfully');
+    }
+  }
+
   
   return {
     signup,
@@ -121,7 +130,8 @@ const useAccount = () => {
     getAccountList,
     transactions,
     getTransactionsByAccountId,
-    getAccountOverview
+    getAccountOverview,
+    unlinkAccount
   }
 
 }

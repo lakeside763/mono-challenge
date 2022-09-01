@@ -4,7 +4,7 @@ import MonoConnect from '@mono.co/connect.js';
 import useAccount from './use-account';
 
 const useLink = () => {
-  const { saveLinkedAccount } = useAccount();
+  const { saveLinkedAccount, unlinkAccount } = useAccount();
   const [code, setCode] = useState<string>();
   
   const monoConnect = useMemo(() => {
@@ -32,10 +32,25 @@ const useLink = () => {
       };
       generateAccountId();
     }
-  }, [code])
+  }, [code]);
+
+  const unlink = async (accountId: string) => {
+    console.log(accountId)
+    const response = await fetch(`https://api.withmono.com/accounts/${accountId}/unlink`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "mono-sec-key": process.env.REACT_APP_MONO_TEST_SK!,
+      },
+    });
+    if (response.status === 200) {
+      await unlinkAccount(accountId);
+    } 
+  }
 
   return  {
     monoConnect,
+    unlink,
   }
 }
 

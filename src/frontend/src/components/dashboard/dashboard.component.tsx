@@ -25,11 +25,16 @@ const Dashboard = () => {
     <Fragment>
       <div className="dashboard-container">
         <section className="section-wrapper">
+          <div className="mobile-view">
+            <TotalBalance totalBalance={data.totalBalance} />
+          </div>
           <ExpensesTracker />
           <LatestTransactions transactions={data.transactions} />
         </section>
         <aside className="aside-wrapper">
-          <TotalBalance totalBalance={data.totalBalance} />
+          <div className="web-view">
+            <TotalBalance totalBalance={data.totalBalance} />
+          </div>
           <Expenses />
         </aside>
       </div>

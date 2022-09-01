@@ -1,10 +1,14 @@
 import React, { createContext } from 'react';
-import useAccount from '../hooks/use-account';
+import { LoginFormValues } from '../components/login/login.component';
+import { SignupFormValues } from '../components/signup/signup.component';
+import useAccount, { UserInterface } from '../hooks/use-account';
+
+
 
 interface AppContextInterface {
-  signup: (data: any) => {}
-  login: (data: any) => {}
-  user: any,
+  signup: (data: SignupFormValues) => {}
+  login: (data: LoginFormValues) => {}
+  user: UserInterface,
   auth: false
   logout: () => {}
   saveLinkedAccount: (data: any) => {}

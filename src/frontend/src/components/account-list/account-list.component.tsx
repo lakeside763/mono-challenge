@@ -8,12 +8,14 @@ import useLink from '../../hooks/use-link';
 import './account-list.style.scss';
 
 const AccountList = () => {
-  const { monoConnect } = useLink();
+  const { monoConnect, unlink } = useLink();
   const { accountList, getAccountList } = useContext(AppContext);
 
   useEffect(() => {
     getAccountList();
   }, []);
+
+
   
   return (
     <div className="list-wrapper">
@@ -47,7 +49,7 @@ const AccountList = () => {
               <td>
                 <span className="action-btn">
                   <Link to={`/app/list/${list.accountId}`}><FiArrowRight /></Link>
-                  <FiTrash2 />
+                  <span className="unlink" onClick={() => unlink(list.accountId)}><FiTrash2 /></span>
                 </span>
               </td>
             </tr>
