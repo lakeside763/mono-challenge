@@ -46,7 +46,8 @@ function Home() {
           </Fragment>
         ): ''}
           <Link to="/#" onClick={logout} className="flex-link">
-                <span>Logout</span> <FiLogOut />
+                <span className="text">Logout </span> 
+                <span className="icon"><FiLogOut /></span>
           </Link>
       </div>
       <main className="main" ref={mainDivRef}>
