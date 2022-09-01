@@ -18,9 +18,15 @@ const jwt = {
   expiresIn: process.env.JWT_EXP,
 }
 
+const mono = {
+  secretKey: process.env.MONO_TESK_SK_KEY,
+  apiKey: process.env.MONO_API_KEY,
+}
+
 export default {
   port,
   redis,
   mongoDB,
   jwt,
+  mono
 }

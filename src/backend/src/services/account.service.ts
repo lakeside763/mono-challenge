@@ -1,12 +1,15 @@
 import { SaveLinkAccount } from "../models/account.model";
 import RootService from "./root.service"
+import config from './../config';
+
+const { mono: { apiKey, secretKey } } = config;
 
 class AccountService extends RootService {
   constructor() {
     super();
     this.baseURL = 'https://api.withmono.com'
-    this.apiKey = 'mono-sec-key'
-    this.secretKey = 'test_sk_dJXIBwlcoA7Mx0uCaTc5'
+    this.apiKey = `${apiKey}`
+    this.secretKey = `${secretKey}`
   }
 
   async getAccountId(code: string) {
