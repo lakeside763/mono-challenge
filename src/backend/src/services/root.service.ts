@@ -29,7 +29,6 @@ class RootService {
 
   async post(path: string, data: any) {
     const url = `${this.baseURL}${path}`
-    console.log(url);
     const response: any = await fetch(url, {
       method: 'POST',
       headers: {
@@ -38,7 +37,6 @@ class RootService {
       },
       body: JSON.stringify(data)
     });
-    console.log(await response.json());
     return response.json();
   }
 }
