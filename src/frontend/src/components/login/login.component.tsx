@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../../assets/mono-black-logo.png';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import "./login.style.scss";
-import useAccount from '../../hooks/use-account';
+import { AppContext } from '../../context/app.context';
 
 type FormValues = {
   email: string,
@@ -14,7 +14,7 @@ type FormValues = {
 }
 
 const Login = () => {
-  const { login } = useAccount();
+  const { login } = useContext(AppContext);
   const schema = Yup.object({
     email: Yup.string().required('First name is required'),
     password: Yup.string().required('Last name is required'),
@@ -26,7 +26,7 @@ const Login = () => {
   });
 
   const onSubmit = async (formData: FormValues) => {
-    await login(formData);
+    login(formData);
   }
 
   return (

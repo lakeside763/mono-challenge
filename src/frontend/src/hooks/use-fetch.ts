@@ -13,13 +13,10 @@ const useFetch = () => {
     }
     if (data !== null) requestOptions.body = JSON.stringify(data);
     if (token) requestOptions.headers["Authorization"] = `jwt ${token}`;
-
-    console.log(requestOptions);
-    console.log(url);
     
     const response = await fetch(url, requestOptions);
     if (response.status === 200) {
-      return response.json();
+      return await response.json();
     } else {
       const { errors } = await response.json();
       toast.error(errors[0].message);

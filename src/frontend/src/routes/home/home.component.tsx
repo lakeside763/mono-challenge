@@ -1,10 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef, Fragment } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import  logo from '../../assets/mono-white-logo.png';
+import LoginUser from '../../assets/user-avatar.jpg'
+import { AppContext } from '../../context/app.context';
 import './home.style.scss';
 
 function Home() {
-  const link = '';
+  const { user } = useContext(AppContext);
   const closeNavRef = useRef<HTMLSpanElement | any>(null);
   const openNavRef = useRef<HTMLSpanElement | any>(null);
   const sideNavRef = useRef<HTMLDivElement | any>(null);
@@ -21,6 +24,7 @@ function Home() {
     mainDivRef.current.style.marginLeft = "0";
     openNavRef.current.style.display = "block";
   }
+
   return (
     <div className="home-wrapper">
       <div className="sidenav" ref={sideNavRef}>
@@ -28,18 +32,24 @@ function Home() {
           <div><img src={logo} alt="logo" /></div>
           <span onClick={handleCloseNavBtn} ref={closeNavRef} className="close-btn">&times;</span>
         </div>
-        <a href={link} >Dashboard</a>
-        <a href={link} >Expenses</a>
-        <a href={link} >Wallets</a>
-        <a href={link} >Summary</a>
-        <a href={link} >Accounts</a>
-        <a href={link} >Settings</a>
+        {user && user.hasLinkedAccount ? (
+          <Fragment>
+            <Link to="/app/dashboard" >Dashboard</Link>
+            <Link to="/app/list" >Accounts</Link>
+            <Link to="/app/settings" >Settings</Link>
+          </Fragment>
+        ) : ''}
       </div>
       <main className="main" ref={mainDivRef}>
         <div className="top-bar-wrapper">
           <span onClick={handleOpenNavBtn} ref={openNavRef} className="open-nav">&#9776; </span>
           <div className="top-bar">
-            <h2>Mono</h2>
+            <div className="login-user">
+              <span>Hi, {user.firstName}</span>
+              <div className='avatar'>
+                <img src={LoginUser} alt="login user"/>
+              </div>
+            </div>
           </div>
         </div>
         <Outlet />

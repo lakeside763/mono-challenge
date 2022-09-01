@@ -4,20 +4,23 @@ import LinkBankLogo from '../../../assets/link-bank-logo.png';
 import { FiPlusCircle } from 'react-icons/fi';
 
 import './total-balance.style.scss'
+import useLink from '../../../hooks/use-link';
 
-const TotalBalance = () => {
+const TotalBalance = ({ totalBalance }: any) => {
+  const { monoConnect } = useLink();
+  
   return (
     <div className="account">
       <div className="figure">
         <h3 className="figure-child">Total Balance</h3>
-        <h1 className="figure-child">30,000,000</h1>
+        <h1 className="figure-child">{parseInt(totalBalance).toLocaleString()}</h1>
         <p>Your balance across all Banks</p>
       </div>
       
       <div className="button">
         <div className="add-link">
           <img src={LinkBankLogo} alt="link bank logo" />
-          <span className="link-btn">
+          <span className="link-btn" onClick={() => monoConnect.open()}>
             <FiPlusCircle />
           </span>
         </div>

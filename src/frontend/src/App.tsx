@@ -6,6 +6,9 @@ import Login from './components/login/login.component';
 import Signup from './components/signup/signup.component';
 import Home from './routes/home/home.component';
 import { Toaster } from 'react-hot-toast';
+import AccountList from './components/account-list/account-list.component';
+import AccountDetails from './components/account-details/account-details.component';
+import Settings from './components/settings/settings.component';
 
 function App() {
   
@@ -18,6 +21,9 @@ function App() {
           <Route path='/app' element={<Home />}>
             <Route path="/app/dashboard" element={<Dashboard />} />
             <Route path="/app/link-account" element={<LinkAccount />} />
+            <Route path="/app/list" element={<AccountList />} />
+            <Route path="/app/account/:id" element={<AccountDetails />} />
+            <Route path="/app/settings" element={<Settings />} />
           </Route>
         </Route>
       </Routes>

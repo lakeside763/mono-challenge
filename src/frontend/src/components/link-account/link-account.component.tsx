@@ -1,43 +1,11 @@
-import React, { Fragment, useMemo, useState, useEffect } from 'react'
+import { Fragment } from 'react'
 import { FiLock } from 'react-icons/fi';
-import MonoConnect from '@mono.co/connect.js';
 
 import './link-account.style.scss';
-import useAccount from '../../hooks/use-account';
+import useLink from '../../hooks/use-link';
 
 const LinkAccount = () => {
-  const { saveLinkedAccount } = useAccount();
-  const [code, setCode] = useState<string>();
-  
-  const monoConnect = useMemo(() => {
-    const monoInstance = new MonoConnect({
-      key: process.env.REACT_APP_MONO_TEST_PK,
-      onSuccess: ({ code }: { code: string }) => setCode(code),
-    });
-    monoInstance.setup();
-    return monoInstance;
-  }, []);
-
-  useEffect(() => {
-    if (code) {
-      const generateAccountId = async () => {
-        const response = await fetch('https://api.withmono.com/account/auth', {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "mono-sec-key": process.env.REACT_APP_MONO_TEST_SK!,
-          },
-          body: JSON.stringify({ code }),
-        });
-        const { id } = await response.json();
-        await saveLinkedAccount({ accountId: id, code })
-      };
-      generateAccountId();
-    }
-  }, [code, saveLinkedAccount])
-
-
-  
+  const { monoConnect } = useLink();
   return (
     <Fragment>
       <div className="link-account-wrapper">
