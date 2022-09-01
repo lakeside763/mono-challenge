@@ -5,6 +5,7 @@
 - [https://mono-api.netlify.app/.netlify/functions/api](https://mono-api.netlify.app/.netlify/functions/api)
 
 ### The solution is hosted on Netlify.
+- the package.json file on the root folder is used for netlify deployment.
 
 ### Project Setup
 The project has a src root which consist of backend and fronted app <br />
