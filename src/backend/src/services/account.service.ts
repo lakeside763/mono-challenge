@@ -18,7 +18,7 @@ class AccountService extends RootService {
     const { account } = await this.getAccountDetails(accountId);
 
     if (!hasLinkedAccount) {
-      await this.db.users.findOneAndUpdate({ _id: userId }, { hasLinkedAccount: !hasLinkedAccount });
+      await this.db.users.findOneAndUpdate({ _id: userId }, { hasLinkedAccount: !hasLinkedAccount, defaultAccountId: accountId });
     }
 
     return this.db.accounts.create({
@@ -39,13 +39,11 @@ class AccountService extends RootService {
     return this.get(`/accounts/${accountId}`);
   }
 
-  async getDefaultAccount(userId: string) {
-    const response = await this.db.accounts.where('userId').equals(userId)
-                                            .where('isDefault').equals(true);
-    if (response) {
-      const { account } = await this.getAccountDetails(response[0].accountId);
-      return account;
-    }
+  async getAccountsOverview(userId: string) {
+    const list = await this.getAccountList(userId);
+    const totalBalance = list.reduce((acc, { balance }) => acc + balance, 0);
+    const transactions = await this.getAccountTransactions(list[0].accountId);
+    return { totalBalance, transactions: transactions.data.slice(0, 5)}
   }
 
   async getAccountList(userId: string) {

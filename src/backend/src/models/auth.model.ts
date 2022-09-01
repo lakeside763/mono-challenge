@@ -19,6 +19,7 @@ export interface IUser {
   email: string;
   password: string;
   hasLinkedAccount: boolean;
+  defaultAccountId: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -57,6 +58,7 @@ const userSchema = new mongoose.Schema<IUser>({
     type: Boolean,
     default: () => false
   },
+  defaultAccountId: String,
   createdAt: {
     type: Date,
     immutable: true,
