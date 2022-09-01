@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react'
 import { FiArrowRight, FiPlusCircle, FiTrash2 } from 'react-icons/fi';
 import { AppContext } from '../../context/app.context';
