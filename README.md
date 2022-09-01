@@ -1,7 +1,7 @@
 # Mono challenge Challenge
 
 ## App URL
-- [https://mono-web-app.netlify.app/](https://mono-web-app.netlify.app/) - 
+- [https://mono-web-app.netlify.app/](https://mono-web-app.netlify.app/)
 - [https://mono-api.netlify.app/.netlify/functions/api](https://mono-api.netlify.app/.netlify/functions/api)
 
 ### The solution is hosted on Netlify.
