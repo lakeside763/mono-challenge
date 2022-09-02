@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useFetch from './use-fetch';
 
 export interface UserInterface {
@@ -16,7 +16,6 @@ export interface UserInterface {
 
 const useAccount = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const { fetch } = useFetch();
   const [user, setUser] = useState({});
   const [auth, setAuth] = useState(false);
@@ -75,6 +74,8 @@ const useAccount = () => {
     const response = await fetch('/accounts/overview', 'GET');
     if (response) {
       return response;
+    } else {
+      navigate('/app/link-account');
     }
   }
 
@@ -83,9 +84,7 @@ const useAccount = () => {
     if (response) {
       setAccount(response);
       toast.success('Account successfully linked');
-      if (location.pathname !== '/app/dashboard') {
-        navigate('/app/dashboard');
-      }
+      
     }
   }
 

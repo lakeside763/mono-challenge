@@ -13,7 +13,7 @@ const TotalBalance = ({ totalBalance }: any) => {
     <div className="account">
       <div className="figure">
         <h3 className="figure-child">Total Balance</h3>
-        <h1 className="figure-child">{parseInt(totalBalance).toLocaleString()}</h1>
+        <h1 className="figure-child">{totalBalance ? parseInt(totalBalance).toLocaleString() : 0}</h1>
         <p>Your balance across all Banks</p>
       </div>
       
