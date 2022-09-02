@@ -7,6 +7,7 @@
     text-align: center;
 
     .figure-child {
+      margin-top: 20px;
       margin-bottom: 10px;
       font-weight: 700;
     }
@@ -46,7 +47,9 @@
     }
 
     .unlink {
+      margin-bottom: 30px;
       .warning-btn {
+        text-decoration: none;
         background-color: #f7e9e9;
         padding: 20px 40px;
         font-size: 16px;

@@ -5,6 +5,7 @@ import { FiPlusCircle } from 'react-icons/fi';
 
 import './total-balance.style.scss'
 import useLink from '../../../hooks/use-link';
+import { Link } from 'react-router-dom';
 
 const TotalBalance = ({ totalBalance }: any) => {
   const { monoConnect } = useLink();
@@ -25,7 +26,7 @@ const TotalBalance = ({ totalBalance }: any) => {
           </span>
         </div>
         <div className="unlink" title="Link an account">
-          <button className="warning-btn">UNLINK BANK ACCOUNT</button>
+          <Link to="/app/list" className="warning-btn">UNLINK BANK ACCOUNT</Link>
         </div>
       </div>
     </div>
