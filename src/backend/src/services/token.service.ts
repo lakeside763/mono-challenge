@@ -17,7 +17,7 @@ class TokenService {
   }
 
   cacheKey(id: string) {
-    return `mono-api-${process.env.NODE_ENV}-tokenchacke-${id}`;
+    return `mono-api-${process.env.NODE_ENV}-tokencache-${id}`;
   }
 
   async set({ user }: any) {

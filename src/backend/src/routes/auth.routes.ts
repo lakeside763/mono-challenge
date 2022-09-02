@@ -23,6 +23,16 @@ function authRoutes(router: Router, services: Services) {
       errorResponse(error, res, next)
     }
   });
+
+  router.post('/auth/logout', async(req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { token } = await services.token.getAuth({ req, next });
+      await services.token.delete({ token });
+      return res.status(200).json({ message: 'User logout successfully' });
+    } catch (error) {
+      return next(error);
+    }
+  });
 }
 
 export default authRoutes;

@@ -59,7 +59,7 @@ class AccountService extends RootService {
 
   async unLinkAccount(accountId: string, userId: string) {
     await this.db.accounts.findOneAndDelete({ accountId });
-    return this.getAccountList(userId)
+    return this.getAccountList(userId);
   }
 }
 
