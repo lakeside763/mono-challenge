@@ -24,3 +24,7 @@ The Solution was developed with NodeJs  and React.<br />
 2. Run yarn install
 3. Run yarn start (to start the application).
 
+
+### API Documentation
+The documentation is done with Postman
+- [https://documenter.getpostman.com/view/1194460/VUxRNR9Y](API Documentation)
