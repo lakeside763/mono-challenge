@@ -62,12 +62,14 @@ const useAccount = () => {
   const logout = async () => {
     const response = await fetch('/auth/logout', 'POST');
     if (response) {
+      console.log(response);
       setUser({});
       setAuth(false);
-      localStorage.removeItem('auth-token')
-      localStorage.clear();
-      toast.success(response);
-    } 
+      localStorage.removeItem('auth-token');
+      localStorage.removeItem('user');
+      toast.success(response.message);
+      navigate('/');
+    }
   }
 
   const getAccountOverview = async () => {
