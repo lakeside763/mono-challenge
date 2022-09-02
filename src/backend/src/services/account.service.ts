@@ -1,6 +1,7 @@
-import { SaveLinkAccount } from "../models/account.model";
+import { IAccount, SaveLinkAccount } from "../models/account.model";
 import RootService from "./root.service"
 import config from './../config';
+import { BadRequestError } from "../utils/errors/bad-request-error";
 
 const { mono: { apiKey, secretKey } } = config;
 
@@ -43,7 +44,10 @@ class AccountService extends RootService {
   }
 
   async getAccountsOverview(userId: string) {
-    const list = await this.getAccountList(userId);
+    const list: IAccount[] = await this.getAccountList(userId);
+    if (list.length < 1) {
+      throw new BadRequestError('No existing linked account');
+    }
     const totalBalance = list.reduce((acc, { balance }) => acc + balance, 0);
     const transactions = await this.getAccountTransactions(list[0].accountId);
     return { totalBalance, transactions: transactions.data.slice(0, 5)}
@@ -59,7 +63,7 @@ class AccountService extends RootService {
 
   async unLinkAccount(accountId: string, userId: string) {
     await this.db.accounts.findOneAndDelete({ accountId });
-    return this.getAccountList(userId);
+    return this.getAccountList(userId)
   }
 }
 
