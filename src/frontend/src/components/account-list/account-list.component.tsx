@@ -1,22 +1,70 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { FiArrowRight, FiPlusCircle, FiTrash2 } from 'react-icons/fi';
-import { AppContext } from '../../context/app.context';
 import { Link } from "react-router-dom";
-import useLink from '../../hooks/use-link';
+import MonoConnect from '@mono.co/connect.js';
 
 import './account-list.style.scss';
+import useAccount from '../../hooks/use-account';
 
 const AccountList = () => {
-  const { monoConnect, unlink } = useLink();
-  const { accountList, getAccountList } = useContext(AppContext);
+  const { getAccountList, saveLinkedAccount, unlinkAccount } = useAccount();
+  const [accountList, setAccountList] = useState<any[]>([]);
+  const [code, setCode] = useState<string>();
 
-  useEffect(() => {
-    getAccountList();
+  const monoConnect = useMemo(() => {
+    const monoInstance = new MonoConnect({
+      key: process.env.REACT_APP_MONO_TEST_PK,
+      onSuccess: ({ code }: { code: string }) => setCode(code),
+    });
+    monoInstance.setup();
+    return monoInstance;
   }, []);
 
+  useEffect(() => {
+    const fetchAccountList = async () => {
+      const response = await getAccountList();
+      setAccountList(response);
+    }
+    fetchAccountList();
+  }, []);
 
-  
+  useEffect(() => {
+    if (code) {
+      const generateAccountId = async () => {
+        const response = await fetch('https://api.withmono.com/account/auth', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+            "mono-sec-key": process.env.REACT_APP_MONO_TEST_SK!,
+          },
+          body: JSON.stringify({ code }),
+        });
+        const { id } = await response.json();
+        const account = await saveLinkedAccount({ accountId: id, code });
+        const updatedAccountList: any[] = [...accountList, account];
+        setAccountList(updatedAccountList)
+      };
+      generateAccountId();
+    }
+  }, [code]);
+
+  const unlink = async (accountId: string) => {
+    console.log(accountId)
+    const response = await fetch(`https://api.withmono.com/accounts/${accountId}/unlink`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "mono-sec-key": process.env.REACT_APP_MONO_TEST_SK!,
+      },
+    });
+    if (response.status === 200) {
+      const accounts = await unlinkAccount(accountId);
+      console.log(accounts);
+      setAccountList(accounts);
+    } 
+  }
+
   return (
     <div className="list-wrapper">
       <div className="heading">

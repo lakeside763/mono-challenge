@@ -62,7 +62,6 @@ const useAccount = () => {
   const logout = async () => {
     const response = await fetch('/auth/logout', 'POST');
     if (response) {
-      console.log(response);
       setUser({});
       setAuth(false);
       localStorage.removeItem('auth-token');
@@ -86,7 +85,7 @@ const useAccount = () => {
     if (response) {
       setAccount(response);
       toast.success('Account successfully linked');
-      
+      return response;
     }
   }
 
@@ -101,6 +100,7 @@ const useAccount = () => {
     const response = await fetch('/accounts/list', 'GET');
     if (response) {
       setAccountList(response);
+      return response;
     }
   }
 
@@ -117,6 +117,7 @@ const useAccount = () => {
     if (response) {
       setAccountList(response);
       toast.success('Account unlinked successfully');
+      return response;
     }
   }
 
