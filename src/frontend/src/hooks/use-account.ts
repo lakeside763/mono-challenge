@@ -43,7 +43,6 @@ const useAccount = () => {
     fetchLoggedInUser();
   }, []);
 
-
   const login = async (data: any) => {
     const response = await fetch('/auth/login', 'POST', data);
     if (response) {
@@ -62,10 +61,14 @@ const useAccount = () => {
   }
 
   const logout = async () => {
-    setUser({});
-    setAuth(false);
-    localStorage.removeItem('auth-token')
-    localStorage.clear();
+    const response = await fetch('/auth/logout', 'POST');
+    if (response) {
+      setUser({});
+      setAuth(false);
+      localStorage.removeItem('auth-token')
+      localStorage.clear();
+      toast.success(response);
+    } 
   }
 
   const getAccountOverview = async () => {
